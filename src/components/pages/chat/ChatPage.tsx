@@ -5,6 +5,7 @@ import Row from '@/components/common/Row';
 import GetStarted from "./GetStarted";
 import { Colors } from '@/statics/colors';
 const ChatPageEl = styled(Row)`
+    background-color: black;
     position: relative;
     width: 100svw;
     min-height: 100svh;

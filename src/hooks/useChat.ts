@@ -45,12 +45,16 @@ export default function useChat() {
 
   // Scroll to bottom when messages change
   useEffect(() => {
-    if (messages.length > 0) {
+    if (messages.length > 0) 
+    {
       setStage("CHAT");
-      if (typeof window !== "undefined") {
+      if (typeof window !== "undefined") 
+      {
         document.getElementById("chotta-chat")?.scrollTo({ top: 1000000000 });
       }
-    } else {
+    } 
+    else 
+    {
       setStage("GET_STARTED");
     }
   }, [messages]);
@@ -72,7 +76,6 @@ export default function useChat() {
     setInput,
     inputRef,
     regenerate,
-    reset,
-     
+    reset,    
   };
 }

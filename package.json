@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "ai": "^5.0.10",
+    "@ai-sdk/openai": "^2.0.14",
+    "@ai-sdk/react": "^2.0.14",
+    "ai": "^5.0.14",
     "next": "15.4.6",
     "ollama-ai-provider": "^1.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

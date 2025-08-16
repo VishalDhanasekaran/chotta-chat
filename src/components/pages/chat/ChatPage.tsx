@@ -1,43 +1,23 @@
 'use client'
 import React, { useState } from 'react'
-import styled from 'styled-components';
-import { Colors } from '@/statics/colors';
-import Row from '@/components/common/Row';
 import GetStarted from "./GetStarted";
 import ChatInput from '@/components/common/input/ChatInput';
 import useChat from "@/hooks/useChat";
-
-const ChatPageEl = styled(Row)`
-    background-color: black;
-    position: relative;
-    width: 100svw;
-    min-height: 100svh;
-    height: fit-content;
-    color: ${Colors.White}
-`;
-function ChatPage() {
+import { ChatPageEl } from '@/components/ui/ChatPage';
+export default function ChatPage() 
+{
    
     const { messages,
         stage,
         input,
         status,
-        error,
-        stop,
         handleSubmit,
         setInput,
         inputRef,
-        regenerate,
-        reset,
+        handleInputChange
     } = useChat();
 
     const canSend = (status !== 'submitted' && status !== 'streaming') && typeof input == 'string' && input.length > 0
-    const handleInputChange = (
-        e:
-          | React.ChangeEvent<HTMLInputElement>
-          | React.ChangeEvent<HTMLTextAreaElement>
-      ) => {
-        
-      }
     return (
 
         <>
@@ -50,6 +30,7 @@ function ChatPage() {
                     canSend={canSend}
                     messageCount={messages.length}
                     prompt={input}
+                    handleInputChange={handleInputChange}
                     
                 />
             </ChatPageEl>
@@ -58,4 +39,3 @@ function ChatPage() {
     )
 }
 
-export default ChatPage

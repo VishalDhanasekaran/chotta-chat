@@ -1,12 +1,23 @@
 import { useChat as useAIChat} from '@ai-sdk/react';
 import { useEffect, useRef, useState } from "react";
+import { ChatRequestOptions } from "ai";
 
 export type CHAT_STATE = "GET_STARTED" | "CHAT";
 
-export default function useChat() {
+export default function useChat() 
+{
   const [stage, setStage] = useState<CHAT_STATE>("GET_STARTED");
   const [input, setInput] = useState('');
-  const inputRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null); // Changed to HTMLInputElement
+  
+  const handleInputChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setInput(e.target.value)
+  }
+
   
   const {
     messages,
@@ -22,18 +33,25 @@ export default function useChat() {
     },
   });
 
-  // Custom submit handler
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    sendMessage({ text: input });
-    setInput('');
+  // Custom submit handler - updated to match the expected signature
+  const handleSubmit = (
+    event?: { preventDefault?: () => void }, 
+    chatRequestOptions?: ChatRequestOptions
+  ) => {
+    // Prevent default if event is provided
+    if (event?.preventDefault) {
+      event.preventDefault();
+    }
+    
+    // Only send if there's input
+    if (input.trim()) {
+      sendMessage({ text: input.trim() });
+      setInput('');
+    }
   };
-
-
 
   const reset = () => {
     stop();
-    
     setInput("");
     setMessages([]);
   };
@@ -61,7 +79,7 @@ export default function useChat() {
 
   // Focus on prompt input when not loading
   useEffect(() => {
-    if (status==="ready") 
+    if (status === "ready") 
       focusPrompt();
   }, [status]);
 
@@ -74,6 +92,7 @@ export default function useChat() {
     stop,
     handleSubmit,
     setInput,
+    handleInputChange,
     inputRef,
     regenerate,
     reset,    

@@ -53,7 +53,7 @@ Before running this application, ensure you have the following installed:
 
 3. Pull the phi3 model (or any other model you prefer):
    ```bash
-   ollama pull phi3
+   ollama pull tinyllama
    ```
 
 ## Usage

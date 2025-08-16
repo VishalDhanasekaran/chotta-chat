@@ -28,7 +28,7 @@ Before running this application, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/VishalDhanasekaran/chotta-chat.git
    cd chotta-chat
    ```
 
@@ -101,7 +101,7 @@ Next.js API route that handles communication with Ollama models and streams resp
 
 The application uses Ollama's default configuration:
 - Base URL: `http://localhost:11434`
-- Default model: `phi3`
+- Default model: `tinyllama`
 
 To use a different model, update the model name in `/app/api/chat/route.ts`:
 

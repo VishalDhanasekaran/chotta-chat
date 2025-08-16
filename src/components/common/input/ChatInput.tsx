@@ -49,10 +49,10 @@ export default function ChatInput({
       <HolderEl $chatting={messageCount > 0}>
         <input
           ref={inputRef}
-          disabled={status === 'streaming' || status === 'submitted'} // Fixed typo: 'submited' -> 'submitted'
+          disabled={status === 'streaming' || status === 'submitted'} 
           id="CHAT_INPUT"
           value={prompt}
-          onChange={handleInputChange} // Fixed: was (e)=>{}, now properly calls handleInputChange
+          onChange={handleInputChange}
           style={{ height: "auto" }}
           placeholder="Ask me about stuff"
         />

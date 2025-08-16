@@ -39,7 +39,7 @@ export const SugEl = styled.div`
   padding: 20px;
   border-radius: 20px;
   width: 100%;
-  /* max-width: 200px; */
+  max-width: 200px; 
   user-select: none;
   cursor: pointer;
   height: 80px;

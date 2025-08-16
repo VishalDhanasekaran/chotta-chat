@@ -20,7 +20,7 @@ export const UserBubbleEl = styled(Row)`
   max-width: calc(100svw - 40px);
 `;
 
-const ResponseBubbleEl = styled(Row)`
+export const ResponseBubbleEl = styled(Row)`
   padding: 10px;
   background-color: ${Colors.Secondary};
   border-radius: 10px;

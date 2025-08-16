@@ -131,10 +131,3 @@ export const CharacterCounterEl = styled(Row)`
   gap: 3px;
   border-radius: 10px;
 `;
-export const ChatHolderEl = styled(Row)`
-  width: 100%;
-  height: fit-content;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px 20px 130px 20px;
-`;

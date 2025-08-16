@@ -5,7 +5,7 @@ import Row from "../Row";
 import Spinner from "../Spinner";
 import SendBtn from "./SendBtn";
 
-const ChatInputEl = styled(Row)<{ $hasmessage: string }>`
+const ChatInputEl = styled(Row) <{ $hasmessage: string }>`
   position: fixed;
   bottom: 0;
   z-index: 2;
@@ -64,9 +64,7 @@ export default function ChatInput({
   handleSubmit,
   prompt,
   canSend,
-  handleInputChange,
-  maxContextSize,
-  isLoading,
+  status,
   messageCount,
   inputRef,
 }: {
@@ -80,14 +78,10 @@ export default function ChatInput({
     chatRequestOptions?: ChatRequestOptions
   ) => void;
   canSend: boolean;
-  maxContextSize: number;
 
-  isLoading: boolean;
-  handleInputChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => void;
+
+  status: string;
+
 }) {
   return (
     <ChatInputEl
@@ -101,7 +95,7 @@ export default function ChatInput({
     >
       {prompt.length > 0 ? (
         <CharacterCounterEl>
-          {/* <span> {prompt.length}</span>/<span>{maxContextSize}</span> */}
+
           <span> {prompt.length}</span>
         </CharacterCounterEl>
       ) : (
@@ -110,14 +104,14 @@ export default function ChatInput({
       <HolderEl $chatting={messageCount > 0}>
         <input
           ref={inputRef}
-          disabled={isLoading}
+          disabled={status === 'streaming' || status === 'submited'}
           id="CHAT_INPUT"
           value={prompt}
-          onChange={handleInputChange}
+          onChange={(e)=>{}}
           style={{ height: "auto" }}
           placeholder="Ask me about stuff"
         />
-        {isLoading ? (
+        {status === 'submitted' ? (
           <Spinner size="2rem" />
         ) : (
           <SendBtn handleSubmit={handleSubmit} canSend={canSend} />

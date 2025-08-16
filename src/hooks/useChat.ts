@@ -23,7 +23,7 @@ export default function useChat() {
   });
 
   // Custom submit handler
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sendMessage({ text: input });
     setInput('');

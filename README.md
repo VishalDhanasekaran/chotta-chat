@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chotta Chat
 
-## Getting Started
+A simple, clean chat interface built with Next.js (Typescript), powered by Ollama for local AI conversations.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Chotta Chat is a lightweight chat application that provides a streamlined interface for conversing with AI models running locally through Ollama. The application features a clean, responsive design with real-time streaming responses.
+
+## Features
+
+- Clean and intuitive chat interface
+- Real-time message streaming
+- Local AI model integration via Ollama
+- Responsive design for desktop and mobile
+- TypeScript support for enhanced development experience
+- Character count display for input messages
+- Auto-focus and keyboard shortcuts for improved UX
+
+## Prerequisites
+
+Before running this application, ensure you have the following installed:
+
+- Node.js (version 18 or higher)
+- npm or yarn package manager
+- Ollama (for local AI model hosting)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone 
+   cd chotta-chat
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Install required AI packages:
+   ```bash
+   npm install ai ollama-ai-provider
+   ```
+
+## Ollama Setup
+
+1. Install Ollama on your system by visiting [ollama.ai](https://ollama.ai)
+
+2. Start the Ollama service:
+   ```bash
+   ollama serve
+   ```
+
+3. Pull the phi3 model (or any other model you prefer):
+   ```bash
+   ollama pull phi3
+   ```
+
+## Usage
+
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000`
+
+3. Begin chatting with the AI model through the clean interface
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts          # API endpoint for chat functionality
+│   └── page.tsx                  # Main application page
+├── components/
+│   ├── common/
+│   │   └── input/
+│   │       └── ChatInput.tsx     # Chat input component
+│   └── ui/
+│       └── ChatPage.tsx          # UI components and styled elements
+├── hooks/
+│   └── useChat.ts                # Custom hook for chat functionality
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### useChat Hook
+Custom React hook that manages chat state, message handling, and integration with the AI SDK.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ChatInput Component
+Responsive input component with keyboard shortcuts, character counting, and submission handling.
 
-## Learn More
+### API Route
+Next.js API route that handles communication with Ollama models and streams responses back to the client.
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application uses Ollama's default configuration:
+- Base URL: `http://localhost:11434`
+- Default model: `phi3`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To use a different model, update the model name in `/app/api/chat/route.ts`:
 
-## Deploy on Vercel
+```typescript
+const result = await streamText({
+  model: ollama('your-model-name'),
+  messages,
+});
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+### Technologies Used
+
+- Next.js 14+ with App Router
+- TypeScript
+- AI SDK by Vercel
+- Ollama AI Provider
+- Styled Components (inferred from component structure)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request

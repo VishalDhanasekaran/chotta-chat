@@ -1,36 +1,20 @@
-import { createOllama } from "ollama-ai-provider";
-import { streamText } from "ai";
+import { NextRequest, NextResponse } from "next/server";
+import ollama from "ollama";
 
-export async function POST(req: Request) 
+export  async function POST(req:NextRequest) 
 {
-  try 
-  {
-    const { messages } = await req.json();
-    
-    // Create Ollama instance
-    const ollama = createOllama({
-      baseURL: 'http://localhost:11434',
+ 
+  try {
+    const { message } = await req.json();
+
+    const response = await ollama.chat({
+      model: "tinyllama",
+      messages: [{ role: "user", content: message }],
     });
-    
-    // Get the model
-    const model = ollama('tinyllama');
-    
-    // Stream the response
-    const result = await streamText({
-      model,
-      messages,
-      maxTokens: 1000,
-    });
-    
-    return result.toTextStreamResponse;
-  } 
-  catch (error) 
-  {
-    console.error('Error in chat API:', error);
-    
-    return Response.json(
-      { error: 'Failed to process chat request' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ message: response.message.content });
+  } catch (error) {
+    console.error("Ollama API error:", error);
+    return NextResponse.json({ error: "Failed to get response from LLM" });
   }
 }
